@@ -1,0 +1,16 @@
+fastlane_version '2.82.0'
+
+### Circle CI ####
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+	test
+end
+
+#### Test ####
+
+desc 'Run Tests'
+lane :test do
+  run_tests(project: "MobileVLCKit.xcodeproj", scheme: "MobileVLCKit")
+end

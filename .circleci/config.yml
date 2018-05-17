@@ -1,0 +1,25 @@
+version: 2
+
+jobs:
+  build:
+    macos:
+      xcode: "9.3.0"
+    environment:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+    shell: /bin/bash --login -eo pipefail
+    steps:
+      - checkout
+      - restore_cache:
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
+      - run: bundle check || bundle install --path .bundle
+      - save_cache:
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - .bundle
+      - run:
+          name: Build and run tests
+          command: bundle exec fastlane ci
+			- store_artifacts:
+          path: /Users/distiller/Library/Logs/gym
+

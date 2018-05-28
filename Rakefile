@@ -21,13 +21,17 @@
 #
 # ------------------------------------------------------------- Constants ------
 
+PROJECT_MOBILE = 'MobileVLCKit.xcodeproj'
+
 SDK_SIM = 'iphonesimulator11.3'
 SDK_SIM_DEST = "'platform=iOS Simulator,name=iPhone 7,OS=11.3'"
 
 SCHEME_IOS = 'MobileVLCKitTests'
-PROJECT_IOS = 'MobileVLCKit.xcodeproj'
 
 VLC_FLAGS_IOS = '-dva x86_64'
+
+CODECOV_PATH = 'Tests/Coverage'
+SLATHER_CMD = "bundle exec slather coverage --ignore 'Tests/*'"
 
 # ----------------------------------------------------------------- Tasks ------
 
@@ -48,13 +52,30 @@ end
 desc 'Run MobileVLCKit tests'
 task 'test:ios' do
   puts 'Running tests for MobileVLCKit'
-  sh "xcodebuild -project #{PROJECT_IOS} -scheme #{SCHEME_IOS} -sdk #{SDK_SIM} -destination #{SDK_SIM_DEST} test"
+  run "xcodebuild -project #{PROJECT_MOBILE} -scheme #{SCHEME_IOS} -sdk #{SDK_SIM} -destination #{SDK_SIM_DEST} test | xcpretty && exit ${PIPESTATUS[0]}"
+end
+
+desc 'Generate code coverage reports (iOS)'
+task 'codecov:ios' do
+  puts 'Generating code coverage reports (iOS)'
+  generate_coverage(SCHEME_IOS, PROJECT_MOBILE)
 end
 
 # ------------------------------------------------------------- Functions ------
+
+def generate_coverage(scheme, project)
+  run "#{SLATHER_CMD} -s --scheme #{scheme} #{project} | grep -v 'Slather*'"
+  run "#{SLATHER_CMD} --html --output-directory #{CODECOV_PATH}/#{scheme} --scheme #{scheme} #{project}", quiet: true
+end
 
 def dirs_exist?(directories)
   directories.each do |dir|
     return false unless Dir.exist?(dir)
   end
+end
+
+def run(command, options = {})
+  system_options = {}
+  system_options[:out] = File::NULL if options[:quiet]
+  system(command.to_s, system_options) || exit!
 end

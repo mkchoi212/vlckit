@@ -394,7 +394,7 @@
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CA0301CB20ADFD2500452BB8 /* MobileVLCKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileVLCKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0301CF20ADFD2500452BB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CA8A2F5520B44BD600F5D3EA /* VLCTimeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VLCTimeTest.swift; path = ../Sources/VLCTimeTest.swift; sourceTree = "<group>"; };
+		CA8A2F5520B44BD600F5D3EA /* VLCTimeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLCTimeTest.swift; sourceTree = "<group>"; };
 		CA978D1E20B89F4B00F7E768 /* MobileVLCKitTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MobileVLCKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libMobileVLCKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMobileVLCKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -505,7 +505,7 @@
 				7D89394F1B500DBC008F2B14 /* StaticLibVLC */,
 				7D13295A1BA304D900BE647E /* TVVLCKit */,
 				7DB683801C995D39000C70BE /* DynamicTVVLCKit */,
-				CA0301CC20ADFD2500452BB8 /* MobileVLCKitTests */,
+				CA0B184420BDDB35001CA52B /* Tests */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
@@ -708,10 +708,25 @@
 			children = (
 				CA978D1E20B89F4B00F7E768 /* MobileVLCKitTests-Bridging-Header.h */,
 				CA0301CF20ADFD2500452BB8 /* Info.plist */,
+			);
+			path = MobileVLCKitTests;
+			sourceTree = "<group>";
+		};
+		CA0B184420BDDB35001CA52B /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				CA0B184520BDDB57001CA52B /* Sources */,
+				CA0301CC20ADFD2500452BB8 /* MobileVLCKitTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		CA0B184520BDDB57001CA52B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
 				CA8A2F5520B44BD600F5D3EA /* VLCTimeTest.swift */,
 			);
-			name = MobileVLCKitTests;
-			path = Tests/MobileVLCKitTests;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -23,21 +23,28 @@
 
 PROJECT_MOBILE = 'MobileVLCKit.xcodeproj'
 
-SDK_SIM = 'iphonesimulator11.3'
-SDK_SIM_DEST = "'platform=iOS Simulator,name=iPhone 7,OS=11.3'"
+SDK_SIM_IOS = 'iphonesimulator11.3'
+SDK_SIM_TVOS = 'appletvsimulator11.3'
+
+SDK_SIM_DEST_IOS = "'platform=iOS Simulator,name=iPhone 7,OS=11.3'"
+SDK_SIM_DEST_TVOS= "'platform=tvOS Simulator,name=Apple TV,OS=11.3'"
 
 SCHEME_IOS = 'MobileVLCKitTests'
+SCHEME_TVOS = 'TVVLCKitTests'
 
 VLC_FLAGS_IOS = '-dva x86_64'
+VLC_FLAGS_TVOS = '-dst'
 
-CODECOV_PATH = 'Tests/Coverage'
-SLATHER_CMD = "bundle exec slather coverage --ignore 'Tests/*'"
+DERIVED_DATA_PATH = 'DerivedData'
+COVERAGE_REPORT_PATH = 'Tests/Coverage'
+
+XCPRETTY = "xcpretty && exit ${PIPESTATUS[0]}"
 
 # ----------------------------------------------------------------- Tasks ------
 
-desc 'Build VLCKit (iOS)'
+desc 'Build MobileVLCKit'
 task 'build:vlckit:ios' do
-  puts 'Building VLCKit (iOS)'
+  puts 'Building MobileVLCKit'
 
   plugin_file = 'Resources/MobileVLCKit/vlc-plugins-iPhone.h'
   required_dirs = ['./libvlc/vlc/install-iPhoneSimulator', './libvlc/vlc/build-iPhoneSimulator']
@@ -49,33 +56,61 @@ task 'build:vlckit:ios' do
   end
 end
 
+desc 'Build TVVLCKit'
+task 'build:vlckit:tvos' do
+  puts 'Building TVVLCKit'
+
+  plugin_file = 'Resources/MobileVLCKit/vlc-plugins-AppleTV.h'
+  required_dirs = ['./libvlc/vlc/install-AppleTVSimulator', './libvlc/vlc/build-AppleTVSimulator']
+
+  if File.exist?(plugin_file) && dirs_exist?(required_dirs)
+    puts 'Found pre-existing build directory. Skipping build'
+  else
+    sh "./compileAndBuildVLCKit.sh #{VLC_FLAGS_TVOS}"
+  end
+end
+
 desc 'Run MobileVLCKit tests'
 task 'test:ios' do
   puts 'Running tests for MobileVLCKit'
-  run "xcodebuild -project #{PROJECT_MOBILE} -scheme #{SCHEME_IOS} -sdk #{SDK_SIM} -destination #{SDK_SIM_DEST} test | xcpretty && exit ${PIPESTATUS[0]}"
+  sh "xcodebuild -derivedDataPath #{DERIVED_DATA_PATH}/#{SCHEME_IOS} -project #{PROJECT_MOBILE} -scheme #{SCHEME_IOS} -sdk #{SDK_SIM_IOS} -destination #{SDK_SIM_DEST_IOS} test | #{XCPRETTY}"
 end
 
-desc 'Generate code coverage reports (iOS)'
+desc 'Run TVVLCKit tests'
+task 'test:tvos' do
+  puts 'Running tests for TVVLCKit'
+  sh "xcodebuild -derivedDataPath #{DERIVED_DATA_PATH}/#{SCHEME_TVOS} -project #{PROJECT_MOBILE} -scheme #{SCHEME_TVOS} -sdk #{SDK_SIM_TVOS} -destination #{SDK_SIM_DEST_TVOS} test | #{XCPRETTY}"
+end
+
+desc 'Generate MobileVLCKit test coverage reports'
 task 'codecov:ios' do
-  puts 'Generating code coverage reports (iOS)'
-  generate_coverage(SCHEME_IOS, PROJECT_MOBILE)
+  puts 'Generating MobileVLCKit test coverage reports'
+  generate_coverage(SCHEME_IOS)
+end
+
+desc 'Generate TVVLCKit test coverage reports'
+task 'codecov:tvos' do
+  puts 'Generating TVVLCKit test coverage reports'
+  generate_coverage(SCHEME_TVOS)
 end
 
 # ------------------------------------------------------------- Functions ------
 
-def generate_coverage(scheme, project)
-  run "#{SLATHER_CMD} -s --scheme #{scheme} #{project} | grep -v 'Slather*'"
-  run "#{SLATHER_CMD} --html --output-directory #{CODECOV_PATH}/#{scheme} --scheme #{scheme} #{project}", quiet: true
+def generate_coverage(scheme)
+  report_name = "#{COVERAGE_REPORT_PATH}/#{scheme}_coverage.txt"
+  scheme_derived_data = "#{DERIVED_DATA_PATH}/#{scheme}"
+
+  if Dir.exist?(scheme_derived_data)
+    sh "mkdir -p #{COVERAGE_REPORT_PATH}"
+    sh "xcrun xccov view #{scheme_derived_data}/Logs/Test/*.xccovreport > #{report_name}"
+    sh "cat #{report_name}"
+  else
+    puts "#{scheme} has not been tested yet. Please run its tests first"
+  end
 end
 
 def dirs_exist?(directories)
   directories.each do |dir|
     return false unless Dir.exist?(dir)
   end
-end
-
-def run(command, options = {})
-  system_options = {}
-  system_options[:out] = File::NULL if options[:quiet]
-  system(command.to_s, system_options) || exit!
 end

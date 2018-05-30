@@ -34,10 +34,12 @@ jobs:
           name: Run Tests
           command: |
             rake test:ios
+            rake test:tvos
       - run:
           name: Generate Coverage Reports
           command: |
             rake codecov:ios
+            rake codecov:tvos
       - store_artifacts:
           path: Tests/Coverage
           destination: Coverage

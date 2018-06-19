@@ -188,10 +188,7 @@ static void HandleMediaParsedChanged(const libvlc_event_t * event, void * self)
         track_type = libvlc_track_text;
 
     const char *ret = libvlc_media_get_codec_description(track_type, fourcc);
-    if (ret)
-        return [NSString stringWithUTF8String:ret];
-
-    return @"";
+    return [NSString stringWithUTF8String:ret];
 }
 
 + (instancetype)mediaWithURL:(NSURL *)anURL;

@@ -2,7 +2,6 @@
  * VLCTimeTest.swift
  *****************************************************************************
  * Copyright (C) 2018 VLC authors and VideoLAN
- * Copyright (C) 2018 Mike JS. Choi
  * $Id$
  *
  * Authors: Mike JS. Choi <mkchoi212 # icloud.com>

@@ -88,6 +88,7 @@ NSString *const VLCMediaMetaChanged              = @"VLCMediaMetaChanged";
 - (void)initInternalMediaDescriptor;
 
 /* Operations */
+- (void)fetchEssentialMetaInformation;
 - (void)fetchMetaInformationFromLibVLCWithType:(NSString*)metaType;
 #if !TARGET_OS_IPHONE
 - (void)fetchMetaInformationForArtWorkWithURL:(NSString *)anURL;
@@ -291,7 +292,7 @@ static void HandleMediaParsedChanged(const libvlc_event_t * event, void * self)
     return [NSString stringWithFormat:@"<%@ %p>, md: %p, url: %@", [self class], self, p_md, [[_url absoluteString] stringByRemovingPercentEncoding]];
 }
 
-- (NSComparisonResult)compare:(VLCMedia *)media
+- (NSComparisonResult)compare:(nullable VLCMedia *)media
 {
     if (self == media)
         return NSOrderedSame;
@@ -307,7 +308,7 @@ static void HandleMediaParsedChanged(const libvlc_event_t * event, void * self)
         long long duration = libvlc_media_get_duration( p_md );
         if (duration < 0)
             return [VLCTime nullTime];
-         _length = [VLCTime timeWithNumber:@(duration)];
+        _length = [VLCTime timeWithNumber:@(duration)];
     }
     return _length;
 }
@@ -368,7 +369,6 @@ static void HandleMediaParsedChanged(const libvlc_event_t * event, void * self)
     if (!p_md)
         return -1;
 
-    // we are using the default time-out value
     return libvlc_media_parse_with_options(p_md,
                                            options,
                                            timeoutValue);
@@ -376,13 +376,8 @@ static void HandleMediaParsedChanged(const libvlc_event_t * event, void * self)
 
 - (int)parseWithOptions:(VLCMediaParsingOptions)options
 {
-    if (!p_md)
-        return -1;
-
-    // we are using the default time-out value
-    return libvlc_media_parse_with_options(p_md,
-                                           options,
-                                           -1);
+    // Using the default time-out value
+    return [self parseWithOptions:options timeout:-1];
 }
 
 - (void)addOptions:(NSDictionary*)options
@@ -769,7 +764,12 @@ NSString *const VLCMediaTracksInformationTextEncoding = @"encoding"; // NSString
     if (!p_md)
         return nil;
 
-    char *returnValue = libvlc_media_get_meta(p_md, [VLCMedia stringToMetaType:key]);
+    libvlc_meta_t meta = [VLCMedia stringToMetaType:key];
+    if ((int)meta == -1) {
+        [[NSException exceptionWithName:@"Can't set metadata" reason:@"Invalid meta key" userInfo:nil] raise];
+    }
+    
+    char *returnValue = libvlc_media_get_meta(p_md, meta);
 
     if (!returnValue)
         return nil;
@@ -784,8 +784,12 @@ NSString *const VLCMediaTracksInformationTextEncoding = @"encoding"; // NSString
 {
     if (!p_md)
         return;
-
-    libvlc_media_set_meta(p_md, [VLCMedia stringToMetaType:key], [data UTF8String]);
+    
+    libvlc_meta_t meta = [VLCMedia stringToMetaType:key];
+    if ((int)meta == -1) {
+        [[NSException exceptionWithName:@"Can't set metadata" reason:@"Invalid meta key" userInfo:nil] raise];
+    }
+    libvlc_media_set_meta(p_md, meta, [data UTF8String]);
 }
 
 - (BOOL)saveMetadata
@@ -882,7 +886,9 @@ NSString *const VLCMediaTracksInformationTextEncoding = @"encoding"; // NSString
         return;
     }
 
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    if ([[urlString stringByRemovingPercentEncoding] isEqualToString:urlString]) {
+        urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
     if (!urlString) {
         free(p_url);
         return;
@@ -997,10 +1003,25 @@ NSString *const VLCMediaTracksInformationTextEncoding = @"encoding"; // NSString
     libvlc_media_list_release( p_mlist );
 }
 
+- (void)fetchEssentialMetaInformation
+{
+    [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationTitle];
+    [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationArtist];
+    [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationAlbum];
+    [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationDate];
+    [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationGenre];
+    [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationTrackNumber];
+    [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationDiscNumber];
+    [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationNowPlaying];
+    [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationLanguage];
+    [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationDescription];
+}
+
 - (void)parsedChanged:(NSNumber *)isParsedAsNumber
 {
     [self willChangeValueForKey:@"parsedStatus"];
     [self parsedStatus];
+    [self fetchEssentialMetaInformation];
     [self didChangeValueForKey:@"parsedStatus"];
 
     if (!_delegate)
@@ -1015,21 +1036,11 @@ NSString *const VLCMediaTracksInformationTextEncoding = @"encoding"; // NSString
     [self setState: [newStateAsNumber intValue]];
 }
 
-#if TARGET_OS_IPHONE
 - (NSDictionary *)metaDictionary
 {
     if (!areOthersMetaFetched) {
         areOthersMetaFetched = YES;
-
-        [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationTitle];
-        [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationArtist];
-        [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationAlbum];
-        [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationDate];
-        [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationGenre];
-        [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationTrackNumber];
-        [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationDiscNumber];
-        [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationNowPlaying];
-        [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationLanguage];
+        [self fetchEssentialMetaInformation];
     }
     if (!isArtURLFetched) {
         isArtURLFetched = YES;
@@ -1037,13 +1048,6 @@ NSString *const VLCMediaTracksInformationTextEncoding = @"encoding"; // NSString
          * And all the other meta will be added through the libvlc event system */
         [self fetchMetaInformationFromLibVLCWithType: VLCMetaInformationArtworkURL];
     }
-    return [NSDictionary dictionaryWithDictionary:_metaDictionary];
-}
-
-#else
-
-- (NSDictionary *)metaDictionary
-{
     return [NSDictionary dictionaryWithDictionary:_metaDictionary];
 }
 
@@ -1066,7 +1070,6 @@ NSString *const VLCMediaTracksInformationTextEncoding = @"encoding"; // NSString
     }
     return [super valueForKeyPath:keyPath];
 }
-#endif
 @end
 
 /******************************************************************************

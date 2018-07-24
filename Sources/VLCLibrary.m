@@ -71,7 +71,7 @@ static VLCLibrary * sharedLibrary = nil;
     return self;
 }
 
-- (instancetype)initWithOptions:(NSArray*)options
+- (instancetype)initWithOptions:(NSArray *)options
 {
     if (self = [super init]) {
         [self prepareInstanceWithOptions:options];

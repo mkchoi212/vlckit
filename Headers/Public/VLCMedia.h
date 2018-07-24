@@ -160,9 +160,9 @@ typedef NS_ENUM(NSInteger, VLCMediaState) {
  */
 - (instancetype)initWithPath:(NSString *)aPath;
 
-/**
- * TODO
- * \param aName TODO
+/**z
+ * Initializes a new empty VLCMedia node with a given name.
+ * \param aName name of the new node
  * \return A new VLCMedia object, only if there were no errors.
  */
 - (instancetype)initAsNodeWithName:(NSString *)aName;
@@ -217,7 +217,7 @@ typedef NS_ENUM(NSUInteger, VLCMediaType) {
  * equivalent in lexical value, and NSOrderedDescending if the URL of the
  * receiver follows media. If media is nil, returns NSOrderedDescending.
  */
-- (NSComparisonResult)compare:(VLCMedia *)media;
+- (NSComparisonResult)compare:(nullable VLCMedia *)media;
 
 /* Properties */
 /**
@@ -237,7 +237,7 @@ typedef NS_ENUM(NSUInteger, VLCMediaType) {
  * however, this is a blocking operation and will wait until the preparsing is
  * completed before returning anything.
  * \param aDate Time for operation to wait until, if there are no results
- * before specified date then nil is returned.
+ * before specified date then nil time is returned.
  * \return The length of the media resource, nil if it couldn't wait for it.
  */
 - (VLCTime *)lengthWaitUntilDate:(NSDate *)aDate;
@@ -256,6 +256,7 @@ typedef NS_ENUM(unsigned, VLCMediaParsedStatus)
     VLCMediaParsedStatusInit = 0,
     VLCMediaParsedStatusSkipped,
     VLCMediaParsedStatusFailed,
+    VLCMediaParsedStatusTimeout,
     VLCMediaParsedStatusDone
 };
 /**

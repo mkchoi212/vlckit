@@ -147,6 +147,7 @@ extern NSString * VLCMediaPlayerStateToString(VLCMediaPlayerState state);
  * the library instance in use by the player instance
  */
 @property (nonatomic, readonly) VLCLibrary *libraryInstance;
+
 /**
  * the delegate object implementing the optional protocol
  */

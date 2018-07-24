@@ -163,17 +163,14 @@ static void HandleMediaListItemDeleted( const libvlc_event_t * event, void * use
     libvlc_media_list_insert_media(p_mlist, [media libVLCMediaDescriptor], (int)index);
 }
 
-- (void)removeMediaAtIndex:(NSUInteger)index
+- (VLCMedia *)removeMediaAtIndex:(NSUInteger)index
 {
-    dispatch_sync(_serialMediaObjectsQueue, ^{
-        if (index >= [_mediaObjects count])
-            return;
-        //remove from cached Media
-        [_mediaObjects removeObjectAtIndex:index];
-    });
-
+    VLCMedia *target = [_mediaObjects objectAtIndex:index];
+    
     // Remove it from libvlc's medialist
     libvlc_media_list_remove_index(p_mlist, (int)index);
+    
+    return target;
 }
 
 - (VLCMedia *)mediaAtIndex:(NSUInteger)index
@@ -331,6 +328,5 @@ static void HandleMediaListItemDeleted( const libvlc_event_t * event, void * use
     // Let the delegate know that the item is being removed
     if (delegate && [delegate respondsToSelector:@selector(mediaList:mediaRemovedAtIndex:)])
         [delegate mediaList:self mediaRemovedAtIndex:[index intValue]];
-
 }
 @end

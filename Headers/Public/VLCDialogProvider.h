@@ -126,9 +126,9 @@ typedef NS_ENUM(NSUInteger, VLCDialogQuestionType) {
                                  customUI:(BOOL)customUI;
 
 /**
- * initializer method to run the dialog provider instance on a specific library instance
+ * custom renderer used to render the dialogs
  *
- * \return the object set
+ * \note for iOS and tvOS, there are useable implementations available which don't require the use of a custom renderer
  */
 @property (weak, readwrite, nonatomic, nullable) id<VLCCustomDialogRendererProtocol> customRenderer;
 

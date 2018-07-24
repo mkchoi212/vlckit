@@ -88,6 +88,21 @@
 		7DEBDAD9203C561D000A7D2F /* vlc.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CCEC5B7E114D9BE800D34AAB /* vlc.h */; };
 		CA23EBC120BDF02700C0D635 /* VLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DC28D7F20194117002D05C4 /* VLCKit.framework */; };
 		CA23EBCC20BDF07700C0D635 /* VLCTimeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA23EBCB20BDF07700C0D635 /* VLCTimeTest.swift */; };
+		CA48A67F20E478D10030B3C6 /* VLCMediaDelegateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA48A67E20E478D10030B3C6 /* VLCMediaDelegateTest.swift */; };
+		CA6DD81420FC1E7B00987C25 /* VLCMediaPlayerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DD81320FC1E7B00987C25 /* VLCMediaPlayerTest.swift */; };
+		CA6DD81620FC273300987C25 /* VLCMediaPlayerDelegateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DD81520FC273300987C25 /* VLCMediaPlayerDelegateTest.swift */; };
+		CA766ED620E9E53E009B3F3F /* VLCAudioTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA766ED520E9E53E009B3F3F /* VLCAudioTest.swift */; };
+		CA766ED820EA08C5009B3F3F /* VLCMediaListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA766ED720EA08C5009B3F3F /* VLCMediaListTest.swift */; };
+		CA771EDF20F6EBB600EF7299 /* VLCLibraryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA771EDE20F6EBB600EF7299 /* VLCLibraryTest.swift */; };
+		CA7BC8B320F4424100C86820 /* bunny.avi in Resources */ = {isa = PBXBuildFile; fileRef = CA7BC8AA20F4424100C86820 /* bunny.avi */; };
+		CA7BC8B420F4424100C86820 /* sea_lions.mov in Resources */ = {isa = PBXBuildFile; fileRef = CA7BC8AB20F4424100C86820 /* sea_lions.mov */; };
+		CA7BC8B520F4424100C86820 /* salmon.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA7BC8AC20F4424100C86820 /* salmon.mp4 */; };
+		CA7BC8B620F4424100C86820 /* bird.m4v in Resources */ = {isa = PBXBuildFile; fileRef = CA7BC8AD20F4424100C86820 /* bird.m4v */; };
+		CA7BC8B720F4424100C86820 /* XCTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7BC8B020F4424100C86820 /* XCTestHelper.swift */; };
+		CA7BC8B820F4424100C86820 /* ObjcRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7BC8B120F4424100C86820 /* ObjcRuntime.m */; };
+		CA7BC8B920F4424100C86820 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7BC8B220F4424100C86820 /* Video.swift */; };
+		CA80979920ECA0E4007358B6 /* VLCMediaListDelegateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA80979820ECA0E4007358B6 /* VLCMediaListDelegateTest.swift */; };
+		CAA08D3120F47F0900B5E328 /* VLCMediaThumbnailerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA08D3020F47F0900B5E328 /* VLCMediaThumbnailerTest.swift */; };
 		CABF4D5420D8E31700FCCE29 /* VLCMediaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF4D5320D8E31700FCCE29 /* VLCMediaTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -192,6 +207,22 @@
 		CA23EBC020BDF02700C0D635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA23EBCA20BDF07700C0D635 /* VLCKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLCKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		CA23EBCB20BDF07700C0D635 /* VLCTimeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VLCTimeTest.swift; sourceTree = "<group>"; };
+		CA48A67E20E478D10030B3C6 /* VLCMediaDelegateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLCMediaDelegateTest.swift; sourceTree = "<group>"; };
+		CA6DD81320FC1E7B00987C25 /* VLCMediaPlayerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLCMediaPlayerTest.swift; sourceTree = "<group>"; };
+		CA6DD81520FC273300987C25 /* VLCMediaPlayerDelegateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLCMediaPlayerDelegateTest.swift; sourceTree = "<group>"; };
+		CA766ED520E9E53E009B3F3F /* VLCAudioTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLCAudioTest.swift; sourceTree = "<group>"; };
+		CA766ED720EA08C5009B3F3F /* VLCMediaListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLCMediaListTest.swift; sourceTree = "<group>"; };
+		CA771EDE20F6EBB600EF7299 /* VLCLibraryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLCLibraryTest.swift; sourceTree = "<group>"; };
+		CA7BC8AA20F4424100C86820 /* bunny.avi */ = {isa = PBXFileReference; lastKnownFileType = video.avi; path = bunny.avi; sourceTree = "<group>"; };
+		CA7BC8AB20F4424100C86820 /* sea_lions.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sea_lions.mov; sourceTree = "<group>"; };
+		CA7BC8AC20F4424100C86820 /* salmon.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = salmon.mp4; sourceTree = "<group>"; };
+		CA7BC8AD20F4424100C86820 /* bird.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = bird.m4v; sourceTree = "<group>"; };
+		CA7BC8AF20F4424100C86820 /* ObjcRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcRuntime.h; sourceTree = "<group>"; };
+		CA7BC8B020F4424100C86820 /* XCTestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestHelper.swift; sourceTree = "<group>"; };
+		CA7BC8B120F4424100C86820 /* ObjcRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcRuntime.m; sourceTree = "<group>"; };
+		CA7BC8B220F4424100C86820 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		CA80979820ECA0E4007358B6 /* VLCMediaListDelegateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLCMediaListDelegateTest.swift; sourceTree = "<group>"; };
+		CAA08D3020F47F0900B5E328 /* VLCMediaThumbnailerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLCMediaThumbnailerTest.swift; sourceTree = "<group>"; };
 		CABF4D5320D8E31700FCCE29 /* VLCMediaTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VLCMediaTest.swift; sourceTree = "<group>"; };
 		CCEC5B73114D9BE800D34AAB /* deprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = deprecated.h; path = libvlc/vlc/include/vlc/deprecated.h; sourceTree = SOURCE_ROOT; };
 		CCEC5B74114D9BE800D34AAB /* libvlc_events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libvlc_events.h; path = libvlc/vlc/include/vlc/libvlc_events.h; sourceTree = SOURCE_ROOT; };
@@ -436,6 +467,8 @@
 		CA0B184920BDEFB0001CA52B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				CA7BC8A920F4424100C86820 /* Assets */,
+				CA7BC8AE20F4424100C86820 /* Helper */,
 				CA23EBC720BDF03400C0D635 /* Sources */,
 				CA23EBBD20BDF02700C0D635 /* VLCKitTests */,
 			);
@@ -454,10 +487,40 @@
 		CA23EBC720BDF03400C0D635 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CA771EDE20F6EBB600EF7299 /* VLCLibraryTest.swift */,
+				CA6DD81320FC1E7B00987C25 /* VLCMediaPlayerTest.swift */,
+				CA6DD81520FC273300987C25 /* VLCMediaPlayerDelegateTest.swift */,
 				CABF4D5320D8E31700FCCE29 /* VLCMediaTest.swift */,
+				CA766ED720EA08C5009B3F3F /* VLCMediaListTest.swift */,
+				CA80979820ECA0E4007358B6 /* VLCMediaListDelegateTest.swift */,
+				CA48A67E20E478D10030B3C6 /* VLCMediaDelegateTest.swift */,
+				CA766ED520E9E53E009B3F3F /* VLCAudioTest.swift */,
 				CA23EBCB20BDF07700C0D635 /* VLCTimeTest.swift */,
+				CAA08D3020F47F0900B5E328 /* VLCMediaThumbnailerTest.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		CA7BC8A920F4424100C86820 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				CA7BC8AA20F4424100C86820 /* bunny.avi */,
+				CA7BC8AB20F4424100C86820 /* sea_lions.mov */,
+				CA7BC8AC20F4424100C86820 /* salmon.mp4 */,
+				CA7BC8AD20F4424100C86820 /* bird.m4v */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		CA7BC8AE20F4424100C86820 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				CA7BC8AF20F4424100C86820 /* ObjcRuntime.h */,
+				CA7BC8B120F4424100C86820 /* ObjcRuntime.m */,
+				CA7BC8B020F4424100C86820 /* XCTestHelper.swift */,
+				CA7BC8B220F4424100C86820 /* Video.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		CCEC5B6C114D9BD300D34AAB /* libvlc */ = {
@@ -487,6 +550,8 @@
 				634117B911D9344400FA3A70 /* MobileVLCKit.h */,
 				632A0F7C0D38F79200AFC99B /* Stream */,
 				41657C272059D56900AB915B /* TVVLCKit.h */,
+				41657C212059D49200AB915B /* VLCRendererDiscoverer.h */,
+				41657C222059D49200AB915B /* VLCRendererItem.h */,
 				EF73118E0CB5797B009473B4 /* VLCAudio.h */,
 				7D34F5611C90A96C008A39F0 /* VLCDialogProvider.h */,
 				EF78BD120CAEEEE700354E6E /* VLCKit.h */,
@@ -498,8 +563,6 @@
 				63014B7D1042E64A00534090 /* VLCMediaListPlayer.h */,
 				EF8BB8CE0CAFA8D80038A613 /* VLCMediaPlayer.h */,
 				63D88D92124E9BF600F65FA0 /* VLCMediaThumbnailer.h */,
-				41657C212059D49200AB915B /* VLCRendererDiscoverer.h */,
-				41657C222059D49200AB915B /* VLCRendererItem.h */,
 				EF78BD190CAEEEE700354E6E /* VLCTime.h */,
 				6341FCAE0D2C0929002A97B7 /* VLCVideoLayer.h */,
 				EF78BD1A0CAEEEE700354E6E /* VLCVideoView.h */,
@@ -671,6 +734,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA7BC8B420F4424100C86820 /* sea_lions.mov in Resources */,
+				CA7BC8B520F4424100C86820 /* salmon.mp4 in Resources */,
+				CA7BC8B620F4424100C86820 /* bird.m4v in Resources */,
+				CA7BC8B320F4424100C86820 /* bunny.avi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,8 +784,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA48A67F20E478D10030B3C6 /* VLCMediaDelegateTest.swift in Sources */,
+				CA766ED820EA08C5009B3F3F /* VLCMediaListTest.swift in Sources */,
+				CA6DD81620FC273300987C25 /* VLCMediaPlayerDelegateTest.swift in Sources */,
+				CA7BC8B820F4424100C86820 /* ObjcRuntime.m in Sources */,
+				CA80979920ECA0E4007358B6 /* VLCMediaListDelegateTest.swift in Sources */,
+				CA771EDF20F6EBB600EF7299 /* VLCLibraryTest.swift in Sources */,
+				CA6DD81420FC1E7B00987C25 /* VLCMediaPlayerTest.swift in Sources */,
+				CA7BC8B920F4424100C86820 /* Video.swift in Sources */,
 				CABF4D5420D8E31700FCCE29 /* VLCMediaTest.swift in Sources */,
+				CAA08D3120F47F0900B5E328 /* VLCMediaThumbnailerTest.swift in Sources */,
 				CA23EBCC20BDF07700C0D635 /* VLCTimeTest.swift in Sources */,
+				CA766ED620E9E53E009B3F3F /* VLCAudioTest.swift in Sources */,
+				CA7BC8B720F4424100C86820 /* XCTestHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
